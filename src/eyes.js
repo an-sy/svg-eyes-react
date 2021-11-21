@@ -2,13 +2,13 @@ import React from "react";
 
 class Eyes extends React.Component {
 
-  componentDidMount(){
-    const leftListener = this.eyeBinding('leftEye');
-    const rightListener = this.eyeBinding('rightEye');
+  componentDidMount() {
+    const leftListener  = this.eyeBinding('#leftEye');
+    const rightListener = this.eyeBinding('#rightEye');
     document.onmousemove = evt => { // highlander pattern
-      leftListener(evt);
-      rightListener(evt);
-  }
+        leftListener(evt);
+        rightListener(evt);
+    }
 }
 
     eyeView = id => {
@@ -48,7 +48,7 @@ class Eyes extends React.Component {
 
 
      eyeBinding = eyeId => {
-       console.log(eyeId + "_iris ellipse")
+       console.log(eyeId)
         const rect          = document.querySelectorAll(eyeId + "_iris ellipse")[0].getBoundingClientRect();
         const iris          = document.querySelector(eyeId + "_iris");
         const closeLidLayer = document.querySelector(eyeId + "_closeLid");
