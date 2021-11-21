@@ -2,17 +2,17 @@ import React from "react";
 
 class Eyes extends React.Component {
 
-    componentDidMount() {
-        const leftListener  = this.eyeBinding('leftEye');
-        const rightListener = this.eyeBinding('rightEye');
-        document.onmousemove = evt => { // highlander pattern
-            leftListener(evt);
-            rightListener(evt);
-        }
-    }
+  componentDidMount(){
+    const leftListener = this.eyeBinding('leftEye');
+    const rightListener = this.eyeBinding('rightEye');
+    document.onmousemove = evt => { // highlander pattern
+      leftListener(evt);
+      rightListener(evt);
+  }
+}
 
     eyeView = id => {
-    return <svg id="${id}" viewBox="0 0 120 120">
+    return <svg id={id} viewBox="0 0 120 120">
 
       <filter id="shadow">
         <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -31,15 +31,15 @@ class Eyes extends React.Component {
         <stop offset= "90%" stopColor="#8EC0DD" stopOpacity="1" />
         <stop offset="100%" stopColor="#2F3A46" stopOpacity="1" />
       </radialGradient>
-      <g id="${id}_iris">
+      <g id={id+"_iris"}>
         <ellipse cx="60" cy="60" rx="30" ry="30" opacity="1" fill="url(#gradient1)" />
         <ellipse cx="50" cy="50" rx="7"  ry="7"  opacity="1" fill="#FFFFFF" fillOpacity="0.8"/>
       </g>
-      <g id="${id}_openLids">
+      <g id={id+"_openLids"}>
         <path d="M0 60 A60,60 0 0,1 120,60 A60,30 0 0,0 0,60 Z" opacity="1" fill="#FDDC99" fillOpacity="1" filter="url(#shadow)" />
         <path d="M0 60 A60,60 0 0,0 120,60 A60,40 0 0,1 0,60 Z" opacity="1" fill="#F4CB76" fillOpacity="1" />
       </g>
-      <g id="${id}_closeLid">
+      <g id={id+"_closeLid"}>
         <path d="M0 60 A60,60 0 0,1 120,60 A60,40 0 0,1 0,60 Z" opacity="1" fill="#FDDC99" fillOpacity="1" />
       </g>
     </svg>
@@ -48,6 +48,7 @@ class Eyes extends React.Component {
 
 
      eyeBinding = eyeId => {
+       console.log(eyeId + "_iris ellipse")
         const rect          = document.querySelectorAll(eyeId + "_iris ellipse")[0].getBoundingClientRect();
         const iris          = document.querySelector(eyeId + "_iris");
         const closeLidLayer = document.querySelector(eyeId + "_closeLid");
@@ -90,12 +91,12 @@ class Eyes extends React.Component {
     };
 
     render(){
-        return (
-        <div>
-            {this.eyeView('leftEye')}
-            {this.eyeView('rightEye')}
-        </div>
-        )
-    }
+      return (
+      <div>
+          {this.eyeView('leftEye')}
+          {this.eyeView('rightEye')}
+      </div>
+      )
+  }
 
 } export default Eyes
